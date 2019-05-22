@@ -17,3 +17,6 @@ Route::get('/', function () {
 Route::get('/index',function(){
     return 'hola';
 });
+Route::get('/inicio','Controller@index');
+Route::get('/programasVarios','Controller@prueba');
+Route::get('/paginaProfesor','Controller@indexProfesor');
