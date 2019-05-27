@@ -1,5 +1,6 @@
 @include('paginaProfesor.layout')
 @yield('cabecera')
+@yield('menu')
 <div class="dashboard-wrapper">
     <div class="dashboard-ecommerce">
         <div class="container-fluid dashboard-content ">

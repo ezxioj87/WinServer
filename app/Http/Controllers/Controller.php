@@ -24,4 +24,6 @@ class Controller extends BaseController
     {
         return view('paginaProfesor.index');
     }
+
+
 }

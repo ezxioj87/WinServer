@@ -20,3 +20,5 @@ Route::get('/index',function(){
 Route::get('/inicio','Controller@index');
 Route::get('/programasVarios','Controller@prueba');
 Route::get('/paginaProfesor','Controller@indexProfesor');
+Route::get('/crearSeccion','SeccionController@crearSeccion');
+Route::resource('seccions','SeccionController');
