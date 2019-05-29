@@ -6,24 +6,14 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use App\Seccion;
 
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-    public function index()
-    {
-        return view('paginaUsuario.index');
-    }
 
-    public function prueba()
-    {
-        return view('paginaUsuario.prueba');
-    }
 
-    public function indexProfesor()
-    {
-        return view('paginaProfesor.index');
-    }
+
 
 
 }

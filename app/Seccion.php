@@ -8,4 +8,5 @@ class Seccion extends Model
 {
     //
     protected $fillable = ['Nombre','Descripcion'];
+    public $timestamps = false;
 }

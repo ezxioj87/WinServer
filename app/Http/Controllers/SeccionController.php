@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Seccion;
 use Illuminate\Http\Request;
+use Illuminate\Routing\UrlGenerator;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
+
+use Image;
 
 class SeccionController extends Controller
 {
@@ -12,10 +17,16 @@ class SeccionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function crearSeccion()
+    public function index()
     {
-        return view('paginaProfesor.crearSeccion');
+
+
     }
+
+
+
+
+
 
 
     /**
@@ -38,10 +49,20 @@ class SeccionController extends Controller
     {
         //
         $seccion = new Seccion();
-        $seccion->Nombre=$request->input('key:"nombre"');
-        $seccion->Descripcion=$request->input('key:"descripcion"');
+        $seccion->Nombre = $request->input("nombre");
+        $seccion->Descripcion = $request->input("descripcion");
+
+
+        $ruta=public_path().'/imagenes/secciones';
+        $imagenOriginal = $request->file('imagen');
+        $nombreImagen=$seccion->nombre.''.$seccion->id.'.png';
+
+        Input::file('imagen')->move($ruta, $nombreImagen);
+
 
         $seccion->save();
+        return redirect("paginaProfesor");
+
     }
 
     /**
@@ -73,9 +94,12 @@ class SeccionController extends Controller
      * @param  \App\Seccion  $seccion
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Seccion $seccion)
+    public function update(Request $request, $id)
     {
-        //
+        $seccion = Seccion::find($id);
+        $seccion->fill($request->all()) ;
+        $seccion->save();
+        return redirect(action("ProfesorController@Seccion",$id));
     }
 
     /**
@@ -84,10 +108,14 @@ class SeccionController extends Controller
      * @param  \App\Seccion  $seccion
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Seccion $seccion)
+    public function destroy($id)
     {
-        //
+        Seccion::destroy($id);
+
+        return redirect("paginaProfesor");
     }
+
+
 
 
 }

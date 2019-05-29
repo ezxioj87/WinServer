@@ -17,8 +17,10 @@ Route::get('/', function () {
 Route::get('/index',function(){
     return 'hola';
 });
-Route::get('/inicio','Controller@index');
-Route::get('/programasVarios','Controller@prueba');
-Route::get('/paginaProfesor','Controller@indexProfesor');
-Route::get('/crearSeccion','SeccionController@crearSeccion');
+Route::get('/inicio','VisitanteController@indexUsuario');
+Route::get('/programasVarios','VisitanteController@prueba');
+Route::get('/paginaProfesor','ProfesorController@index')->name("indexProfesor");
+Route::get('/paginaProfesor/crearSeccion','ProfesorController@crearSeccion');
+Route::get('/paginaProfesor/Seccion/{id}','ProfesorController@Seccion');
+Route::get('/paginaProfesor/modificarSeccion/{id}','ProfesorController@modificarSeccion')->name("modificarSeccion");
 Route::resource('seccions','SeccionController');

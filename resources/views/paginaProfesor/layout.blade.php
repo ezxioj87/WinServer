@@ -29,7 +29,7 @@
         <!-- ============================================================== -->
         <div class="dashboard-header">
             <nav class="navbar navbar-expand-lg bg-white fixed-top">
-                <a class="navbar-brand" href="index.html">WinServer Admin</a>
+                <a class="navbar-brand" href="{{action('ProfesorController@index')}}">WinServer Admin</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -70,28 +70,21 @@
                                 Menu
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1"><i class="fa fa-fw fa-user-circle"></i>Secciones <span class="badge badge-success">6</span></a>
-                                <div id="submenu-1" class="collapse submenu" style="">
+                                <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="true" data-target="#submenu-1" aria-controls="submenu-1">Secciones <span class="badge badge-success">6</span></a>
+                                <div id="submenu-1" class="submenu" style="">
                                     <ul class="nav flex-column">
-                                        <?php
-                                            $secciones = App\Seccion::all();
-                                            foreach ($secciones as $seccion) {
-                                                echo '<li class="nav-item ">';
-                                                echo '<a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1"><i class="fa fa-fw fa-user-circle"></i>'.$seccion->name.' <span class="badge badge-success">6</span></a>';
-                                                echo '</li>';
-                                             }
-                                        ?>
+
+
+                                            @foreach ($secciones as $seccion)
+                                                <li class="nav-item ">
+                                                <a class="nav-link active" href="{{action('ProfesorController@Seccion',$seccion->id)}}">{{$seccion->getAttributeValue('Nombre')}}</a>
+                                                </li>
+                                            @endforeach
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="{{ action('ProfesorController@crearSeccion') }}" >Crear Seccion</a>
+                                                </li>
                                     </ul>
                                 </div>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ action('SeccionController@crearSeccion') }}" ><i class="fa fa-fw fa-rocket"></i>Crear Seccion</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#" ><i class="fa fa-fw fa-rocket"></i>Eliminar Seccion</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#" ><i class="fa fa-fw fa-rocket"></i>Modificar Seccion</a>
                             </li>
 
                         </ul>
