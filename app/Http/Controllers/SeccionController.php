@@ -52,14 +52,27 @@ class SeccionController extends Controller
         $seccion->Nombre = $request->input("nombre");
         $seccion->Descripcion = $request->input("descripcion");
 
+        if($request->file('imagen')) {
+            $ruta = public_path() . '/imagenes/secciones/';
 
-        $ruta=public_path().'/imagenes/secciones';
-        $imagenOriginal = $request->file('imagen');
-        $nombreImagen=$seccion->nombre.''.$seccion->id.'.png';
+            // recogida del form
+            $imagenOriginal = $request->file('imagen');
 
-        Input::file('imagen')->move($ruta, $nombreImagen);
+            // crear instancia de imagen
+            $imagen = Image::make($imagenOriginal);
 
+            // generar un nombre aleatorio para la imagen
+            $temp_name = $imagenOriginal->getClientOriginalName();;
 
+            $imagen->resize(300, 300);
+
+            // guardar imagen
+            // save( [ruta], [calidad])
+            $imagen->save($ruta . $temp_name, 100);
+            $seccion->nombreImagen = $temp_name;
+        }else {
+            $seccion->nombreImagen = 'luisVelez.jpeg';
+        }
         $seccion->save();
         return redirect("paginaProfesor");
 

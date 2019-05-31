@@ -19,8 +19,28 @@ Route::get('/index',function(){
 });
 Route::get('/inicio','VisitanteController@indexUsuario');
 Route::get('/programasVarios','VisitanteController@prueba');
-Route::get('/paginaProfesor','ProfesorController@index')->name("indexProfesor");
-Route::get('/paginaProfesor/crearSeccion','ProfesorController@crearSeccion');
-Route::get('/paginaProfesor/Seccion/{id}','ProfesorController@Seccion');
-Route::get('/paginaProfesor/modificarSeccion/{id}','ProfesorController@modificarSeccion')->name("modificarSeccion");
+
+Route::get('/paginaProfesor/loginProfesor','ProfesorController@login')->middleware('guest')->name('loginShow');
+Route::Post('login','Auth\LoginController@login')->name('login');
 Route::resource('seccions','SeccionController');
+Route::resource('programas','ProgramaController');
+Route::resource('users','UserController');
+Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
+
+
+Route::group([ 'middleware' => 'auth'], function()
+{
+    Route::get('/paginaProfesor','ProfesorController@index')->name("indexProfesor");
+    Route::get('/paginaProfesor/crearSeccion','ProfesorController@crearSeccion');
+    Route::get('/paginaProfesor/Seccion/{id}','ProfesorController@Seccion');
+    Route::get('/paginaProfesor/Seccion/{id}/crearArchivo','ProfesorController@crearArchivo');
+    Route::get('/paginaProfesor/modificarSeccion/{id}','ProfesorController@modificarSeccion')->name("modificarSeccion");
+    Route::get('/paginaProfesor/modificarArchivo/{id}','ProfesorController@modificarArchivo');
+    Route::get('/paginaProfesor/crearProfesor','ProfesorController@crearProfesor');
+    Route::get('/paginaProfesor/verProfesores','ProfesorController@verProfesores');
+});
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+

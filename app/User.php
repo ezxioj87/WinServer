@@ -6,17 +6,29 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+
 class User extends Authenticatable
 {
     use Notifiable;
 
+    public  function  roles(){
+        return $this->belongsToMany('App\Role');
+    }
+
+    public function  hasRole($role){
+        if($this->roles()->where('name',$role)->first()){
+            return true;
+        }else{
+            return false;
+        }
+    }
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name',  'password',
     ];
 
     /**
@@ -33,7 +45,5 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    public $timestamps = false;
 }

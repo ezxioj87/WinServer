@@ -15,8 +15,10 @@ class CreateSeccionsTable extends Migration
     {
         Schema::create('seccions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('Nombre');
+            $table->string('Nombre')->unique();
             $table->string('Descripcion');
+            $table->string('nombreImagen');
+
         });
     }
 

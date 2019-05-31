@@ -30,7 +30,7 @@
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card">
                             <div class="card-body">
-                                {!! Form::open(['route'=>'seccions.store','method'=>'Post']) !!}
+                                {!! Form::open(['route'=>'seccions.store','method'=>'Post','enctype'=>'multipart/form-data']) !!}
                                     <div class="form-group">
                                         {!! Form::label('Nombre:') !!}
                                         {!! Form::text('nombre',null,['class'=>'form-control','placeholder'=>'Ingresa el nombre de la seccion']) !!}

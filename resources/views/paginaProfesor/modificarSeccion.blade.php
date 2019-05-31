@@ -30,7 +30,7 @@
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card">
                             <div class="card-body">
-                                {!! Form::model($seccion,['route'=>['seccions.update',$seccion->id],'method'=>'PUT']) !!}
+                                {!! Form::model($seccion,['route'=>['seccions.update',$seccion->id],'method'=>'PUT','enctype'=>'multipart/form-data']) !!}
                                 <div class="form-group">
                                     {!! Form::label('Nombre:') !!}
                                     {!! Form::text('Nombre',null,['class'=>'form-control','placeholder'=>'Ingresa el nombre de la seccion']) !!}
@@ -38,6 +38,10 @@
                                 <div class="form-group">
                                     {!! Form::label('Descripcion:') !!}
                                     {!! Form::textarea('Descripcion',null,['class'=>'form-control','placeholder'=>'Ingresa la descripcion de la seccion']) !!}
+                                </div>
+                                <div class="form-group">
+                                    {!! Form::label('Imagen:') !!}
+                                    {!! Form::file('imagen') !!}
                                 </div>
                                 <div class="form-group">
                                     {!! Form::submit('Modificar Sección',['class'=>'btn btn-primary']) !!}
