@@ -15,7 +15,19 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Role');
     }
 
+    public  function  seccions(){
+        return $this->belongsToMany('App\Seccion');
+    }
+
     public function  hasRole($role){
+        if($this->roles()->where('name',$role)->first()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function  hasSeccion($role){
         if($this->roles()->where('name',$role)->first()){
             return true;
         }else{

@@ -17,7 +17,7 @@ Route::get('/', function () {
 Route::get('/index',function(){
     return 'hola';
 });
-Route::get('/inicio','VisitanteController@indexUsuario');
+Route::get('/inicio','VisitanteController@index');
 Route::get('/programasVarios','VisitanteController@prueba');
 
 Route::get('/paginaProfesor/loginProfesor','ProfesorController@login')->middleware('guest')->name('loginShow');
@@ -38,6 +38,7 @@ Route::group([ 'middleware' => 'auth'], function()
     Route::get('/paginaProfesor/modificarArchivo/{id}','ProfesorController@modificarArchivo');
     Route::get('/paginaProfesor/crearProfesor','ProfesorController@crearProfesor');
     Route::get('/paginaProfesor/verProfesores','ProfesorController@verProfesores');
+    Route::get('/paginaProfesor/modificarProfesor/{id}','ProfesorController@modificarProfesor');
 });
 Auth::routes();
 

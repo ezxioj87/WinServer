@@ -1,5 +1,5 @@
 @section('cabecera')
-<!doctype html>
+        <!doctype html>
 <html lang="en">
 
 <head>
@@ -20,50 +20,55 @@
 </head>
 
 <body>
+<!-- ============================================================== -->
+<!-- main wrapper -->
+<!-- ============================================================== -->
+<div class="dashboard-main-wrapper">
     <!-- ============================================================== -->
-    <!-- main wrapper -->
+    <!-- navbar -->
     <!-- ============================================================== -->
-    <div class="dashboard-main-wrapper">
-        <!-- ============================================================== -->
-        <!-- navbar -->
-        <!-- ============================================================== -->
-        <div class="dashboard-header">
-            <nav class="navbar navbar-expand-lg bg-white fixed-top">
-                <a class="navbar-brand" href="{{action('ProfesorController@index')}}">WinServer Admin</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse " id="navbarSupportedContent">
-                    <ul class="navbar-nav ml-auto navbar-right-top">
-                        <li class="nav-item dropdown nav-user">
-                            <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="assets/images/avatar-1.jpg" alt="" class="user-avatar-md rounded-circle"></a>
-                            <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
+    <div class="dashboard-header">
+        <nav class="navbar navbar-expand-lg bg-white fixed-top">
+            <a class="navbar-brand" href="{{action('ProfesorController@index')}}">WinServer Admin</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto navbar-right-top">
+                    <li class="nav-item dropdown nav-user">
+                        <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false"><img src="assets/images/avatar-1.jpg" alt=""
+                                                                           class="user-avatar-md rounded-circle"></a>
+                        <div class="dropdown-menu dropdown-menu-right nav-user-dropdown"
+                             aria-labelledby="navbarDropdownMenuLink2">
 
-                                <div class="nav-user-info">
-                                    <h5 class="mb-0 text-white nav-user-name">{{Auth::user()->name}} </h5>
-                                </div>
-
-                                <a class="dropdown-item" href={{route('logout')}}><i class="fas fa-power-off mr-2"></i>Logout</a>
+                            <div class="nav-user-info">
+                                <h5 class="mb-0 text-white nav-user-name">{{Auth::user()->name}} </h5>
                             </div>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-        <!-- ============================================================== -->
-        <!-- end navbar -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- left sidebar -->
-        <!-- ============================================================== -->
-@endsection
-@section('menu')
+
+                            <a class="dropdown-item" href={{route('logout')}}><i class="fas fa-power-off mr-2"></i>Logout</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <!-- ============================================================== -->
+    <!-- end navbar -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- left sidebar -->
+    <!-- ============================================================== -->
+    @endsection
+    @section('menu')
 
         <div class="nav-left-sidebar sidebar-dark">
             <div class="menu-list">
                 <nav class="navbar navbar-expand-lg navbar-light">
                     <a class="d-xl-none d-lg-none" href="#">Dashboard</a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarNav">
@@ -72,27 +77,38 @@
                                 Menu
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="true" data-target="#submenu-1" aria-controls="submenu-1">Secciones <span class="badge badge-success">6</span></a>
+                                <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="true"
+                                   data-target="#submenu-1" aria-controls="submenu-1">Secciones <span
+                                            class="badge badge-success">6</span></a>
                                 <div id="submenu-1" class="submenu" style="">
                                     <ul class="nav flex-column">
 
-
+                                        @if($secciones==null)
                                             @foreach ($secciones as $seccion)
                                                 <li class="nav-item ">
-                                                <a class="nav-link active" href="{{action('ProfesorController@Seccion',$seccion->id)}}">{{$seccion->Nombre}}</a>
+                                                    <a class="nav-link active"
+                                                       href="{{action('ProfesorController@Seccion',$seccion->id)}}">{{$seccion->Nombre}}</a>
                                                 </li>
                                             @endforeach
-                                            @if($admin)
-                                                <li class="nav-item">
-                                                    <a class="nav-link" href="{{ action('ProfesorController@crearSeccion') }}" >Crear Seccion</a>
-                                                </li>
-                                                    <li class="nav-item">
-                                                        <a class="nav-link" href="{{ action('ProfesorController@verProfesores') }}" >Profesores</a>
-                                                    </li>
-                                             @endif
+                                        @endif
+                                        @if($admin)
+                                            <li class="nav-item">
+                                                <a class="nav-link"
+                                                   href="{{ action('ProfesorController@crearSeccion') }}">Crear
+                                                    Seccion</a>
+                                            </li>
+
+                                        @endif
                                     </ul>
                                 </div>
                             </li>
+                            @if($admin)
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="{{ action('ProfesorController@verProfesores') }}"
+                                    >Profesores
+                                    </a>
+                                </li>
+                            @endif
 
                         </ul>
                     </div>
@@ -105,21 +121,21 @@
         <!-- ============================================================== -->
         <!-- wrapper  -->
         <!-- ============================================================== -->
-@endsection
+    @endsection
 
-@section('pie')
-<div class="footer">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                Copyright © 2018 Concept.
+    @section('pie')
+        <div class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        Copyright © 2018 Concept.
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-<!-- ============================================================== -->
-<!-- end footer -->
-<!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- end footer -->
+        <!-- ============================================================== -->
 </div>
 <!-- ============================================================== -->
 <!-- end wrapper  -->

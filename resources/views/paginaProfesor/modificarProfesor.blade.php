@@ -10,7 +10,7 @@
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="page-header">
-                        <h2 class="pageheader-title">Crear Profesor </h2>
+                        <h2 class="pageheader-title">Modificar Profesor </h2>
                         <div class="page-breadcrumb">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
@@ -30,21 +30,22 @@
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="card">
                             <div class="card-body">
-                                {!! Form::open(['route'=>'users.store','method'=>'Post']) !!}
+
+                                {!! Form::model($user,['route'=>['users.update',$user->id],'method'=>'Put']) !!}
                                 <div class="form-group">
                                     {!! Form::label('Nombre:') !!}
-                                    {!! Form::text('nombre',null,['class'=>'form-control','placeholder'=>'Ingresa el nombre de usuario']) !!}
+                                    {!! Form::text('name',null,['class'=>'form-control','placeholder'=>'Ingresa el nombre de usuario']) !!}
                                 </div>
                                 <div class="form-group">
                                     {!! Form::label('Contraseña:') !!}
-                                    {!! Form::password('pass',['class'=>'form-control']) !!}
+                                    {!! Form::password('password',['class'=>'form-control']) !!}
                                 </div>
                                 <div class="form-group">
                                     {!! Form::label('Rol:') !!}
                                     {!! Form::select('rol', array('admin' => 'Admin', 'user' => 'Usuario'), 'user',['class'=>'form-control']); !!}
                                 </div>
                                 <div class="form-group">
-                                    {!! Form::submit('Crear Profesor',['class'=>'btn btn-primary']) !!}
+                                    {!! Form::submit('Modificar Profesor',['class'=>'btn btn-primary']) !!}
                                 </div>
                                 {!! Form::close() !!}
 

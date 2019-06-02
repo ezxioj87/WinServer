@@ -5,20 +5,7 @@
 
 
     <!-- Modal -->
-    <div class="modal fade" id="ModalBorrarSeccion" tabindex="-1" role="dialog"
-         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">¿Desea eliminar la sección?</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
 
-            </div>
-        </div>
-    </div>
 
     <div class="dashboard-ecommerce">
         <div class="container-fluid dashboard-content ">
@@ -35,13 +22,9 @@
                             <div class="col-lg-3">
                             </div>
                             <div class="col-lg-2">
-                                <a href={{action('ProfesorController@crearProfesor')}} class="btn
-                                   btn-primary">Crear Profesor</a>
-
-                                <!--<button id="myBtn" class="btn btn-info" data-toggle="modal"
-                                        data-target="#ModalBorrarSeccion">Crear Profesor
-                                </button>
-                                -->
+                                <h2 class="pageheader-title"><a
+                                            href={{action('ProfesorController@crearProfesor')}} class="btn
+                                            btn-primary">Crear Profesor</a></h2>
                             </div>
 
 
@@ -76,13 +59,14 @@
                             <tbody>
                             @foreach($profesores as $profesor)
                                 <tr>
-                                <td>{{$profesor->name}}</td>
-
-                                <td><a href={{action('ProfesorController@crearProfesor')}} class="btn
-                                       btn-primary">Modificar Profesor</a></td>
-                                <td><button id="myBtn" class="btn btn-danger" data-toggle="modal"
-                                    data-target="#ModalBorrarSeccion">Eliminar Profesor
-                                    </button></td>
+                                    <td>{{$profesor->name}}</td>
+                                    <td>{{$profesor->roles()->first()->name}}</td>
+                                    <td>
+                                        <a href={{action('ProfesorController@modificarProfesor',$profesor->id)}} class="btn
+                                           btn-primary">Modificar Profesor</a></td>
+                                    {!! Form::model($profesor,['route'=>['users.destroy',$profesor->id],'method'=>'Delete']) !!}
+                                    <td>{!! Form::submit('Eliminar',['class'=>'btn btn-danger']) !!}</td>
+                                    {!! Form::close() !!}
                                 </tr>
                             @endforeach
                             </tbody>
@@ -96,7 +80,6 @@
         </div>
     </div>
 </div>
-
 
 
 @yield('pie')

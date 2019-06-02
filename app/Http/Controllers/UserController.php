@@ -90,7 +90,28 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $role_user= Role::where('name','user')->first();
+        $role_admin= Role::where('name','admin')->first();
+        $user = User::find($id);
+        $user->name = $request->input("name");
+        if(!$request->input("password")=='')
+        {
+            $user->password =  bcrypt($request->input("password"));
+        }
 
+        $user->save();
+        if($user->hasRole('admin')){
+            $user->roles()->detach($role_admin);
+        }else{
+            $user->roles()->detach($role_user);
+        }
+
+        if($request->input("rol")=="admin"){
+            $user->roles()->attach($role_admin);
+        }else{
+            $user->roles()->attach($role_user);
+        }
+        return redirect("paginaProfesor/verProfesores");
     }
 
     /**
@@ -101,12 +122,10 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $programa = new Programa();
-        $programa =Programa::find($id);
-        Programa::destroy($id);
+        User::destroy($id);
 
 
-        return redirect("paginaProfesor/Seccion/".$programa->seccion_id);
+        return redirect("paginaProfesor/verProfesores");
     }
 }
 

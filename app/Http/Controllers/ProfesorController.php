@@ -12,7 +12,8 @@ class ProfesorController extends Controller
     public function index(Request $request)
     {
         $admin= $request->user()->hasRole('admin');
-        view('paginaProfesor.layout')->with('admin',$admin);
+        $secciones = $request->user()->seccions();
+        view()->share('secciones', $secciones);
         return view('paginaProfesor.index')->with('admin',$admin);
     }
     public function verProfesores(Request $request)
@@ -42,13 +43,13 @@ class ProfesorController extends Controller
             return redirect('paginaProfesor');
         }
         $seccion = Seccion::find($id);
-        return view('paginaProfesor.modificarSeccion',compact('seccion',$seccion));
+        return view('paginaProfesor.modificarSeccion')->with('seccion',$seccion)->with('admin',$admin);
     }
-    public function modificarArchivo($id)
+    public function modificarArchivo(Request $request,$id)
     {
-
+        $admin= $request->user()->hasRole('admin');
         $programa = Programa::find($id);
-        return view('paginaProfesor.modificarArchivo')->with('programa',$programa);
+        return view('paginaProfesor.modificarArchivo')->with('programa',$programa)->with('admin',$admin);
     }
 
     public function crearSeccion(Request $request)
@@ -67,10 +68,20 @@ class ProfesorController extends Controller
         }
         return view('paginaProfesor.crearProfesor')->with('admin',$admin);
     }
-
-    public function crearArchivo($id)
+    public function modificarProfesor(Request $request,$id)
     {
-        return view('paginaProfesor.crearArchivo')->with('id',$id);
+        $admin= $request->user()->hasRole('admin');
+        if(!$admin){
+            return redirect('paginaProfesor');
+        }
+        $user = User::find($id);
+        return view('paginaProfesor.modificarProfesor')->with('admin',$admin)->with('user',$user);
+    }
+
+    public function crearArchivo(Request $request,$id)
+    {
+        $admin= $request->user()->hasRole('admin');
+        return view('paginaProfesor.crearArchivo')->with('id',$id)->with('admin',$admin);
     }
 
     public function login(){

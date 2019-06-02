@@ -26,8 +26,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
-        $secciones = Seccion::all();
-        view()->share('secciones', $secciones);
+
+
 
     }
 }
