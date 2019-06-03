@@ -10,7 +10,7 @@
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="page-header">
-                        <h2 class="pageheader-title">Crear Archivo </h2>
+                        <h2 class="pageheader-title">Subir Archivo </h2>
                         <div class="page-breadcrumb">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
@@ -50,7 +50,7 @@
                                     {!! Form::hidden('id',$id) !!}
                                 </div>
                                 <div class="form-group">
-                                    {!! Form::submit('Crear Archivo',['class'=>'btn btn-primary']) !!}
+                                    {!! Form::submit('Subir Archivo',['class'=>'btn btn-primary']) !!}
 
                                 </div>
                                 {!! Form::close() !!}

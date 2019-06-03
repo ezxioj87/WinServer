@@ -43,6 +43,12 @@
                                     {!! Form::label('Rol:') !!}
                                     {!! Form::select('rol', array('admin' => 'Admin', 'user' => 'Usuario'), 'user',['class'=>'form-control']); !!}
                                 </div>
+                                @foreach($todasSecciones as $seccion)
+                                    <div class="form-check form-check-inline">
+                                        {!! Form::label($seccion->Nombre.' ') !!}
+                                        {!! Form::checkbox($seccion->Nombre,$seccion->Nombre) !!}
+                                    </div>
+                                @endforeach
                                 <div class="form-group">
                                     {!! Form::submit('Crear Profesor',['class'=>'btn btn-primary']) !!}
                                 </div>

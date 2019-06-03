@@ -62,7 +62,7 @@
                                     <td>{{$profesor->name}}</td>
                                     <td>{{$profesor->roles()->first()->name}}</td>
                                     <td>
-                                        <a href={{action('ProfesorController@modificarProfesor',$profesor->id)}} class="btn
+                                        <a href={{action('ProfesorController@modificarProfesor',$profesor->name)}} class="btn
                                            btn-primary">Modificar Profesor</a></td>
                                     {!! Form::model($profesor,['route'=>['users.destroy',$profesor->id],'method'=>'Delete']) !!}
                                     <td>{!! Form::submit('Eliminar',['class'=>'btn btn-danger']) !!}</td>

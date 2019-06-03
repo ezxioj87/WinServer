@@ -11,81 +11,110 @@ class ProfesorController extends Controller
 {
     public function index(Request $request)
     {
-        $admin= $request->user()->hasRole('admin');
-        $secciones = $request->user()->seccions();
-        view()->share('secciones', $secciones);
-        return view('paginaProfesor.index')->with('admin',$admin);
+        $admin = $request->user()->hasRole('admin');
+        $user = $request->user();
+        $secciones = $user->seccions;
+        return view('paginaProfesor.index')->with('admin', $admin)->with('secciones', $secciones);
     }
+
     public function verProfesores(Request $request)
     {
-        $admin= $request->user()->hasRole('admin');
-        if(!$admin){
+        $admin = $request->user()->hasRole('admin');
+        if (!$admin) {
             return redirect('paginaProfesor');
         }
         $profesores = User::all();
-        view('paginaProfesor.layout')->with('admin',$admin);
-        return view('paginaProfesor.verProfesores')->with('admin',$admin)->with('profesores',$profesores);
+        $user = $request->user();
+        $secciones = $user->seccions;
+        view('paginaProfesor.layout')->with('admin', $admin);
+        return view('paginaProfesor.verProfesores')->with('admin', $admin)->with('profesores', $profesores)->with('secciones', $secciones);
     }
 
 
-
-    public function Seccion(Request $request,$id)
+    public function Seccion(Request $request, $nombre)
     {
-        $admin= $request->user()->hasRole('admin');
-        $seccion = Seccion::find($id);
-        $programas= Seccion::find($id)->programas;
-        return view('paginaProfesor.Seccion')->with('seccion',$seccion)->with('programas',$programas)->with('admin',$admin);
+        $admin = $request->user()->hasRole('admin');
+        $user = $request->user();
+        $secciones = $user->seccions;
+        $seccion = Seccion::where('Nombre',$nombre)->get()->first();
+        $programas = $seccion->programas;
+        return view('paginaProfesor.Seccion')->with('seccion', $seccion)->with('programas', $programas)->with('admin', $admin)->with('secciones', $secciones);
     }
-    public function modificarSeccion(Request $request,$id)
+
+    public function modificarSeccion(Request $request, $nombre)
     {
-        $admin= $request->user()->hasRole('admin');
-        if(!$admin){
+        $admin = $request->user()->hasRole('admin');
+        if (!$admin) {
             return redirect('paginaProfesor');
         }
-        $seccion = Seccion::find($id);
-        return view('paginaProfesor.modificarSeccion')->with('seccion',$seccion)->with('admin',$admin);
+        $user = $request->user();
+        $secciones = $user->seccions;
+        $usuarios = User::all();
+        $seccion = Seccion::where('Nombre',$nombre)->get()->first();
+        return view('paginaProfesor.modificarSeccion')->with('seccion', $seccion)->with('admin', $admin)->with('secciones', $secciones)->with('usuarios', $usuarios);
     }
-    public function modificarArchivo(Request $request,$id)
+
+    public function modificarArchivo(Request $request, $nombre)
     {
-        $admin= $request->user()->hasRole('admin');
-        $programa = Programa::find($id);
-        return view('paginaProfesor.modificarArchivo')->with('programa',$programa)->with('admin',$admin);
+        $admin = $request->user()->hasRole('admin');
+        $programa = Programa::where('Nombre',$nombre)->get()->first();
+        $user = $request->user();
+
+        $secciones = $user->seccions;
+        return view('paginaProfesor.modificarArchivo')->with('programa', $programa)->with('admin', $admin)->with('secciones', $secciones);
     }
 
     public function crearSeccion(Request $request)
     {
-        $admin= $request->user()->hasRole('admin');
-        if(!$admin){
+        $admin = $request->user()->hasRole('admin');
+        if (!$admin) {
             return redirect('paginaProfesor');
         }
-        return view('paginaProfesor.crearSeccion')->with('admin',$admin);
+        $usuarios = User::all();
+        $user = $request->user();
+        $secciones = $user->seccions;
+        return view('paginaProfesor.crearSeccion')->with('admin', $admin)->with('usuarios', $usuarios)->with('secciones', $secciones);
     }
+
     public function crearProfesor(Request $request)
     {
-        $admin= $request->user()->hasRole('admin');
-        if(!$admin){
+        $admin = $request->user()->hasRole('admin');
+        if (!$admin) {
             return redirect('paginaProfesor');
         }
-        return view('paginaProfesor.crearProfesor')->with('admin',$admin);
+        $user = $request->user();
+
+        $user = $request->user();
+        $secciones = $user->seccions;
+        $todasSecciones = Seccion::all();
+        return view('paginaProfesor.crearProfesor')->with('admin', $admin)->with('secciones', $secciones)->with('todasSecciones', $todasSecciones);
     }
-    public function modificarProfesor(Request $request,$id)
+
+    public function modificarProfesor(Request $request, $nombre)
     {
-        $admin= $request->user()->hasRole('admin');
-        if(!$admin){
+        $admin = $request->user()->hasRole('admin');
+        if (!$admin) {
             return redirect('paginaProfesor');
         }
-        $user = User::find($id);
-        return view('paginaProfesor.modificarProfesor')->with('admin',$admin)->with('user',$user);
+        $user = User::where('name',$nombre)->get()->first();
+        $usuario = $request->user();
+        $secciones = $usuario->seccions;
+        $todasSecciones = Seccion::all();
+        return view('paginaProfesor.modificarProfesor')->with('admin', $admin)->with('user', $user)->with('secciones', $secciones)->with('todasSecciones', $todasSecciones);;
     }
 
-    public function crearArchivo(Request $request,$id)
+    public function crearArchivo(Request $request, $nombre)
     {
-        $admin= $request->user()->hasRole('admin');
-        return view('paginaProfesor.crearArchivo')->with('id',$id)->with('admin',$admin);
+        $admin = $request->user()->hasRole('admin');
+        $seccion = Seccion::where('Nombre',$nombre)->get()->first();
+        $user = $request->user();
+        $secciones = $user->seccions;
+        return view('paginaProfesor.crearArchivo')->with('id', $seccion->id)->with('admin', $admin)->with('secciones', $secciones);
     }
 
-    public function login(){
-        $admin=false;
-        return view('paginaProfesor.loginProfesor')->with('admin',$admin);
+    public function login()
+    {
+        $admin = false;
+        return view('paginaProfesor.loginProfesor')->with('admin', $admin);
     }
 }

@@ -31,14 +31,28 @@
                         <div class="card">
                             <div class="card-body">
                                 {!! Form::open(['route'=>'seccions.store','method'=>'Post','enctype'=>'multipart/form-data']) !!}
-                                    <div class="form-group">
-                                        {!! Form::label('Nombre:') !!}
-                                        {!! Form::text('nombre',null,['class'=>'form-control','placeholder'=>'Ingresa el nombre de la seccion']) !!}
-                                    </div>
-                                    <div class="form-group">
-                                        {!! Form::label('Descripcion:') !!}
-                                        {!! Form::textarea('descripcion',null,['class'=>'form-control','placeholder'=>'Ingresa la descripcion de la seccion']) !!}
-                                    </div>
+                                <div class="form-group">
+                                    {!! Form::label('Nombre:') !!}
+                                    {!! Form::text('nombre',null,['class'=>'form-control','placeholder'=>'Ingresa el nombre de la seccion']) !!}
+                                </div>
+                                <div class="form-group">
+                                    {!! Form::label('Descripcion:') !!}
+                                    {!! Form::textarea('descripcion',null,['class'=>'form-control','placeholder'=>'Ingresa la descripcion de la seccion']) !!}
+                                </div>
+                                <div class="form-group">
+                                    {!! Form::label('Profesores:') !!}
+                                    <br>
+                                    @foreach($usuarios as $usuario)
+                                        <div class="form-check form-check-inline">
+                                            {!! Form::label($usuario->name.' ') !!}
+                                            @if($usuario->roles()->first()->name == 'admin')
+                                                {!! Form::checkbox($usuario->name,$usuario->name,true) !!}
+                                            @else
+                                                {!! Form::checkbox($usuario->name,$usuario->name) !!}
+                                            @endif
+                                        </div>
+                                    @endforeach
+                                </div>
                                 <div class="form-group">
                                     {!! Form::label('Imagen:') !!}
                                     {!! Form::file('imagen') !!}

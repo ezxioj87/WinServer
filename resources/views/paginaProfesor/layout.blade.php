@@ -83,11 +83,11 @@
                                 <div id="submenu-1" class="submenu" style="">
                                     <ul class="nav flex-column">
 
-                                        @if($secciones==null)
+                                        @if(!$secciones==null)
                                             @foreach ($secciones as $seccion)
                                                 <li class="nav-item ">
                                                     <a class="nav-link active"
-                                                       href="{{action('ProfesorController@Seccion',$seccion->id)}}">{{$seccion->Nombre}}</a>
+                                                       href="{{action('ProfesorController@Seccion',$seccion->Nombre)}}">{{$seccion->Nombre}}</a>
                                                 </li>
                                             @endforeach
                                         @endif

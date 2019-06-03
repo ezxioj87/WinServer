@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Role;
+use App\Seccion;
 use Illuminate\Http\Request;
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\Http\Response;
@@ -55,6 +56,11 @@ class UserController extends Controller
             $user->roles()->attach($role_admin);
         }else{
             $user->roles()->attach($role_user);
+        }
+        foreach(Seccion::all() as $seccion){
+            if($request->input($seccion->Nombre)==$seccion->Nombre){
+                $user->seccions()->attach(Seccion::where('Nombre',$seccion->Nombre)->first());
+            }
         }
         return redirect("paginaProfesor/verProfesores");
     }
@@ -110,6 +116,17 @@ class UserController extends Controller
             $user->roles()->attach($role_admin);
         }else{
             $user->roles()->attach($role_user);
+        }
+
+
+
+        foreach(Seccion::all() as $seccion){
+            $user->seccions()->detach(Seccion::where('Nombre',$seccion->Nombre)->first());
+        }
+        foreach(Seccion::all() as $seccion){
+            if($request->input($seccion->Nombre)==$seccion->Nombre){
+                $user->seccions()->attach(Seccion::where('Nombre',$seccion->Nombre)->first());
+            }
         }
         return redirect("paginaProfesor/verProfesores");
     }

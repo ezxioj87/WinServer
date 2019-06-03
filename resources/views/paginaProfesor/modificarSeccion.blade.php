@@ -40,12 +40,34 @@
                                     {!! Form::textarea('Descripcion',null,['class'=>'form-control','placeholder'=>'Ingresa la descripcion de la seccion']) !!}
                                 </div>
                                 <div class="form-group">
+                                    {!! Form::label('Profesores:') !!}
+                                    <br>
+                                    @foreach($usuarios as $usuario)
+                                        <div class="form-check form-check-inline">
+                                            {!! Form::label($usuario->name.' ') !!}
+                                            @foreach($seccion->users as $nombreUsuario)
+                                                @if($nombreUsuario->name ==$usuario->name)
+                                                    {!! Form::checkbox($usuario->name,$usuario->name,true) !!}
+                                                    <?php $usuarioEncontrado = true;?>
+                                                    @break
+                                                @else
+                                                    <?php $usuarioEncontrado = false;?>
+                                                @endif
+                                            @endforeach
+                                            @if(!$usuarioEncontrado)
+                                                {!! Form::checkbox($usuario->name,$usuario->name) !!}
+                                            @endif
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <div class="form-group">
                                     {!! Form::label('Imagen:') !!}
                                     {!! Form::file('imagen') !!}
                                 </div>
                                 <div class="form-group">
                                     {!! Form::submit('Modificar Sección',['class'=>'btn btn-primary']) !!}
-                                    <button onclick="{{redirect('paginaProfesor')}}" class="btn btn-primary" >Salir</button>
+                                    <button onclick="{{redirect('paginaProfesor')}}" class="btn btn-primary">Salir
+                                    </button>
                                 </div>
                                 {!! Form::close() !!}
 

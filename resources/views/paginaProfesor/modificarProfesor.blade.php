@@ -42,7 +42,28 @@
                                 </div>
                                 <div class="form-group">
                                     {!! Form::label('Rol:') !!}
-                                    {!! Form::select('rol', array('admin' => 'Admin', 'user' => 'Usuario'), 'user',['class'=>'form-control']); !!}
+                                    {!! Form::select('rol', array('admin' => 'Admin', 'user' => 'Usuario'), $user->roles()->first()->name,['class'=>'form-control']); !!}
+                                </div>
+                                <div class="form-group">
+                                    {!! Form::label('Secciones:') !!}
+                                    <br>
+                                    @foreach($todasSecciones as $seccion)
+                                        <div class="form-check form-check-inline">
+                                            {!! Form::label($seccion->Nombre.' ') !!}
+                                            @foreach($user->seccions as $nombreSeccion)
+                                                @if($nombreSeccion->Nombre ==$seccion->Nombre)
+                                                    {!! Form::checkbox($seccion->Nombre,$seccion->Nombre,true) !!}
+                                                    <?php $seccionEncontrado = true;?>
+                                                    @break
+                                                @else
+                                                    <?php $seccionEncontrado = false;?>
+                                                @endif
+                                            @endforeach
+                                            @if(!$seccionEncontrado)
+                                                {!! Form::checkbox($seccion->Nombre,$seccion->Nombre) !!}
+                                            @endif
+                                        </div>
+                                    @endforeach
                                 </div>
                                 <div class="form-group">
                                     {!! Form::submit('Modificar Profesor',['class'=>'btn btn-primary']) !!}

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Seccion;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\Http\Response;
@@ -74,6 +75,12 @@ class SeccionController extends Controller
             $seccion->nombreImagen = 'luisVelez.jpeg';
         }
         $seccion->save();
+
+        foreach(User::all() as $user){
+            if($request->input($user->name)==$user->name){
+                $seccion->users()->attach(User::where('name',$user->name)->first());
+            }
+        }
         return redirect("paginaProfesor");
 
     }
@@ -112,7 +119,16 @@ class SeccionController extends Controller
         $seccion = Seccion::find($id);
         $seccion->fill($request->all()) ;
         $seccion->save();
-        return redirect(action("ProfesorController@Seccion",$id));
+
+        foreach(User::all() as $user){
+            $seccion->users()->detach(User::where('name',$user->name)->first());
+        }
+        foreach(User::all() as $user){
+            if($request->input($user->name)==$user->name){
+                $seccion->users()->attach(User::where('name',$user->name)->first());
+            }
+        }
+        return redirect(action("ProfesorController@Seccion",$seccion->Nombre));
     }
 
     /**

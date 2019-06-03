@@ -40,7 +40,7 @@
                             <div class="col-lg-2">
                             </div>
                             <div class="col-lg-3">
-                                <a href={{action('ProfesorController@modificarSeccion',$seccion->id)}} class="btn
+                                <a href={{action('ProfesorController@modificarSeccion',$seccion->Nombre)}} class="btn
                                    btn-primary">Modificar</a>
 
                                 <button id="myBtn" class="btn btn-danger" data-toggle="modal"
@@ -67,7 +67,7 @@
 
                 <div class="row">
                     @foreach($programas as $programa)
-                        <div class="modal fade" id="ModalBorrar{{$programa->Nombre}}" tabindex="-1" role="dialog"
+                        <div class="modal fade" id="ModalBorrar{{$programa->id}}" tabindex="-1" role="dialog"
                              aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
@@ -97,24 +97,25 @@
                                                     src="{{ URL::asset('imagenes/archivos/'.$programa->nombreImagen) }}"
                                                     alt="Card image cap"
                                                     class="img-fluid"></a>
+
                                     </div>
                                     <!-- /.figure-img -->
                                     <figcaption class="figure-caption">
                                         <ul class="list-inline d-flex text-muted mb-0">
-                                            <li class="list-inline-item text-truncate mr-auto"><h2><a
-                                                            href="{{ URL::asset('/archivos/'.$programa->nombre) }}"
-                                                            download>{{$programa->Nombre}}</a></h2>
+                                            <li class="list-inline-item text-truncate mr-auto"><h4><a
+                                                            href="{{ URL::asset('/archivos/'.$programa->nombreArchivo) }}"
+                                                            download>{{$programa->Nombre}}</a></h4>
                                             </li>
 
                                         </ul>
                                         <ul class="list-inline d-flex text-muted mb-0">
                                             <li class="list-inline-item">
-                                                <a href={{action('ProfesorController@modificarArchivo',$programa->id)}} class="btn
+                                                <a href={{action('ProfesorController@modificarArchivo',$programa->Nombre)}} class="btn
                                                    btn-primary">Modificar</a>
                                             </li>
                                             <li class="list-inline-item">
                                                 <button id="myBtn" class="btn btn-danger" data-toggle="modal"
-                                                        data-target="#ModalBorrar{{$programa->Nombre}}">Eliminar
+                                                        data-target="#ModalBorrar{{$programa->id}}">Eliminar
                                                 </button>
                                             </li>
                                         </ul>
@@ -132,7 +133,7 @@
                             <figure class="figure">
                                 <!-- .figure-img -->
                                 <div class="figure-attachment">
-                                    <a href="{{ action('ProfesorController@crearArchivo',$seccion->id) }}"><img
+                                    <a href="{{ action('ProfesorController@crearArchivo',$seccion->Nombre) }}"><img
                                                 src="{{ URL::asset('imagenes/archivos/Add.png') }}"
                                                 alt="Card image cap"
                                                 class="img-fluid"></a>
@@ -141,7 +142,7 @@
                                 <figcaption class="figure-caption">
                                     <ul class="list-inline d-flex text-muted mb-0">
                                         <li class="list-inline-item text-truncate mr-auto"><a
-                                                    href="{{ action('ProfesorController@crearArchivo',$seccion->id) }}">Subir
+                                                    href="{{ action('ProfesorController@crearArchivo',$seccion->Nombre) }}">Subir
                                                 Archivo</a>
                                         </li>
 

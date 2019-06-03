@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Programa;
+use App\Seccion;
 use Illuminate\Http\Request;
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\Http\Response;
@@ -84,7 +85,8 @@ class ProgramaController extends Controller
         }
         $programa->seccion_id=$id;
         $programa->save();
-        return redirect("paginaProfesor/Seccion/".$id);
+        $seccion=Seccion::find($programa->seccion_id);
+        return redirect("paginaProfesor/Seccion/".$seccion->Nombre);
     }
 
     /**
@@ -119,13 +121,14 @@ class ProgramaController extends Controller
     public function update(Request $request, $id)
     {
         $programa = Programa::find($id);
-        $programa->fill($request->all()) ;
+        $programa->Nombre = $request->input('Nombre') ;
+        $programa->Descripcion = $request->input('Descripcion');
 
         if($request->file('nombreImagen')) {
             $ruta = public_path() . '\imagenes\archivos/';
 
             // recogida del form
-            $imagenOriginal = $request->file('imagen');
+            $imagenOriginal = $request->file('nombreImagen');
 
             // crear instancia de imagen
             $imagen = Image::make($imagenOriginal);
@@ -141,7 +144,8 @@ class ProgramaController extends Controller
             $programa->nombreImagen = $temp_name;
         }
         $programa->save();
-        return redirect("paginaProfesor/Seccion/".$programa->seccion_id);
+        $seccion = Seccion::find($programa->seccion_id);
+        return redirect("paginaProfesor/Seccion/".$seccion->Nombre);
     }
 
     /**
@@ -154,9 +158,10 @@ class ProgramaController extends Controller
     {
         $programa = new Programa();
         $programa =Programa::find($id);
+        $seccion= Seccion::find($programa->seccion_id);
         Programa::destroy($id);
 
 
-        return redirect("paginaProfesor/Seccion/".$programa->seccion_id);
+        return redirect("paginaProfesor/Seccion/".$seccion->Nombre);
     }
 }

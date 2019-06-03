@@ -1,85 +1,99 @@
-
 @section('cabecera')
+        <!DOCTYPE html>
+<html lang="es">
 
-<!DOCTYPE HTML>
-<!--
-	Editorial by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-	<head>
-		<title>Programas Varios</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="{{ URL::asset('css/paginaUsuario/main.css') }}" />
-		<link rel="stylesheet" href="{{ URL::asset('css/paginaUsuario/bootstrap.min.css') }}" />
-    <link href="../../css/circular-std/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../css/style.css">
-    <link rel="stylesheet" href="../../css/fontawesome-all.css">
-    <link rel="stylesheet" href="../../css/materialdesignicons.min.css">
-	</head>
-	<body class="is-preload">
+<head>
 
-		<!-- Wrapper -->
-			<div id="wrapper">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-				<!-- Main -->
-					<div id="main">
-						<div class="inner">
+    <title>WinServer</title>
 
-							<!-- Header -->
-							<header id="header">
-								<h2><a href="index.html" class="logo"><strong>Ies Luis Velez de Guevara</strong></a></h2>
-								<ul class="icons">
-									<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-									<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-								</ul>
-							</header>
+    <!-- Custom fonts for this template-->
+    <link href="{{ URL::asset('css/paginaUsuario/all.min.css')}}" rel="stylesheet" type="text/css">
+
+    <!-- Page level plugin CSS-->
+    <link href="{{ URL::asset('css/paginaUsuario/dataTables.bootstrap4.css')}}" rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="{{ URL::asset('css/paginaUsuario/sb-admin.css')}}" rel="stylesheet">
+
+    <link href="{{ URL::asset('css/paginaUsuario/mainCard.css')}}" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+<nav class="navbar navbar-expand navbar-white bg-white static-top">
+
+    <a class="navbar-brand mr-1" href="index.html">WinServer</a>
+
+
+</nav>
+
+
+<!-- Main -->
+
 
 @endsection
 @section('menu')
-</div>
-</div>
-				<!-- Sidebar -->
-					<div id="sidebar">
-						<div class="inner">
-							<!-- Menu -->
-								<nav id="menu">
-									<header class="major">
-										<h2>Menu</h2>
-									</header>
-									<ul>
-										<li><a href="{{ action('Controller@index') }}">Inicio</a></li>
-										<li><a href="{{ action('Controller@prueba') }}">Programas Varios</a></li>
-										<li>
-											<span class="opener">Isos</span>
-											<ul>
-												<li><a href="#">Windows</a></li>
-												<li><a href="#">Linux</a></li>
-											</ul>
-										</li>
-									</ul>
-                                </nav>
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="sidebar navbar-nav">
+            @foreach($secciones as $seccion)
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{action('VisitanteController@seccion',$seccion->Nombre)}}">
+                        <span>{{$seccion->Nombre}}</span>
+                    </a>
+                </li>
+            @endforeach
+
+        </ul>
+</html>
+
+
 @endsection
 
 @section('pie')
-<footer id="footer">
-								<p class="copyright">&copy;Ies Luis Velez de Guevara: <a href="http://www.iesluisvelez.org/portal/">Ies Luis Velez de Guevara</a>.</p>
-							</footer>
+    <footer class="sticky-footer">
+        <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+                <span>Copyright © Ies Luis Velez De Guevara</span>
+            </div>
+        </div>
+    </footer>
 
-						</div>
-					</div>
+    </div>
+    <!-- /.content-wrapper -->
 
-			</div>
+    </div>
+    <!-- /#wrapper -->
 
-		<!-- Scripts -->
-			<script src="{!! asset('js/paginaUsuario/jquery.min.js') !!}"></script>
-			<script src="{!! asset('js/paginaUsuario/browser.min.js') !!}"></script>
-			<script src="{!! asset('js/paginaUsuario/breakpoints.min.js') !!}"></script>
-			<script src="{!! asset('js/paginaUsuario/util.js') !!}"></script>
-			<script src="{!! asset('js/paginaUsuario/main.js') !!}"></script>
+    <!-- Scroll to Top Button-->
 
-	</body>
-</html>
+    <!-- Logout Modal-->
+
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="{{ URL::asset('js/paginaUsuario/jquery.min.js')}}"></script>
+    <script src="{{ URL::asset('js/paginaUsuario/bootstrap.bundle.min.js')}}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{{ URL::asset('js/paginaUsuario/jquery.easing.min.js')}}"></script>
+
+    <!-- Page level plugin JavaScript-->
+    <script src="{{ URL::asset('js/paginaUsuario/Chart.min.js')}}"></script>
+    <script src="{{ URL::asset('js/paginaUsuario/jquery.dataTables.js')}}"></script>
+    <script src="{{ URL::asset('js/paginaUsuario/dataTables.bootstrap4.js')}}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="{{ URL::asset('js/paginaUsuario/sb-admin.min.js')}}"></script>
+
+    <!-- Demo scripts for this page-->
+    <script src="{{ URL::asset('js/paginaUsuario/datatables-demo.js')}}"></script>
+    <script src="{{ URL::asset('js/paginaUsuario/chart-area-demo.js')}}"></script>
 @endsection
