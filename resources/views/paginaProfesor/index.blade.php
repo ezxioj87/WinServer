@@ -31,14 +31,14 @@
                         @foreach ($secciones as $seccion)
                             <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
                                 <div class="card">
-                                    <a href={{action('ProfesorController@Seccion',$seccion->Nombre)}}><img
+                                    <a href={{action('ProfesorController@seccion',$seccion->Nombre)}}><img
                                                 class="card-img-top img-fluid"
                                                 src="{{ URL::asset('imagenes/secciones/'.$seccion->nombreImagen) }}"
                                                 alt="Card image cap"></a>
                                     <div class="card-body">
                                         <h3 class="card-title">{{$seccion->Nombre}}</h3>
                                         <p class="card-text">{{ $seccion->Descripcion }} </p>
-                                        <a href={{action('ProfesorController@Seccion',$seccion->Nombre)}} class="btn
+                                        <a href={{action('ProfesorController@seccion',$seccion->Nombre)}} class="btn
                                            btn-primary">Ver más</a>
                                     </div>
                                 </div>

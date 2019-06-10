@@ -50,7 +50,7 @@ class ProgramaController extends Controller
         $programa->Descripcion = $request->input("descripcion");
 
         if($request->file('imagen')) {
-            $ruta = public_path() . '\imagenes\archivos/';
+            $ruta = public_path() . DIRECTORY_SEPARATOR . 'imagenes' . DIRECTORY_SEPARATOR . 'archivos' . DIRECTORY_SEPARATOR;
 
             // recogida del form
             $imagenOriginal = $request->file('imagen');
@@ -72,7 +72,7 @@ class ProgramaController extends Controller
         }
 
         if($request->file('archivo')) {
-            $ruta = public_path() . '\archivos/';
+            $ruta = public_path() . DIRECTORY_SEPARATOR . 'archivos' . DIRECTORY_SEPARATOR;
             $file = $request->file('archivo');
             $programa->nombreArchivo = $file->getClientOriginalName();
 
@@ -86,7 +86,7 @@ class ProgramaController extends Controller
         $programa->seccion_id=$id;
         $programa->save();
         $seccion=Seccion::find($programa->seccion_id);
-        return redirect("paginaProfesor/Seccion/".$seccion->Nombre);
+        return redirect("Administracion/Seccion/".$seccion->Nombre);
     }
 
     /**
@@ -125,7 +125,7 @@ class ProgramaController extends Controller
         $programa->Descripcion = $request->input('Descripcion');
 
         if($request->file('nombreImagen')) {
-            $ruta = public_path() . '\imagenes\archivos/';
+            $ruta = public_path() . DIRECTORY_SEPARATOR . 'imagenes' . DIRECTORY_SEPARATOR . 'archivos' . DIRECTORY_SEPARATOR;
 
             // recogida del form
             $imagenOriginal = $request->file('nombreImagen');
@@ -145,7 +145,7 @@ class ProgramaController extends Controller
         }
         $programa->save();
         $seccion = Seccion::find($programa->seccion_id);
-        return redirect("paginaProfesor/Seccion/".$seccion->Nombre);
+        return redirect("Administracion/Seccion/".$seccion->Nombre);
     }
 
     /**
@@ -156,12 +156,11 @@ class ProgramaController extends Controller
      */
     public function destroy($id)
     {
-        $programa = new Programa();
         $programa =Programa::find($id);
         $seccion= Seccion::find($programa->seccion_id);
         Programa::destroy($id);
 
 
-        return redirect("paginaProfesor/Seccion/".$seccion->Nombre);
+        return redirect("Administracion/Seccion/".$seccion->Nombre);
     }
 }

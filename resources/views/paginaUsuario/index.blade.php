@@ -5,23 +5,16 @@
 
     <div class="container-fluid">
 
-        <!-- Breadcrumbs-->
+        <h1>Bienvenido al WinServer de Ies Luis Velez de Guevara</h1>
+        <hr>
+        <h2>Aquí podras descargar los programas necesarios para tus asignaturas</h2>
+    </div>
 
-        <!-- Icon Cards-->
-
-
-
-        <!-- DataTables Example -->
-        <div class="card mb-3">
-            <div class="card-header">
-
-                <div class="card-body">
-
-                </div>
-
-            </div>
-
-        </div>
+    <div class="card mb-3">
+        <img
+                class="img-fluid"
+                src="{{ URL::asset('imagenes/secciones/fachadaIES.jpg') }}"
+                alt="Card image cap">
     </div>
         <!-- /.container-fluid -->
 

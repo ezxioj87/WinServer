@@ -27,9 +27,9 @@
 
 <body id="page-top">
 
-<nav class="navbar navbar-expand navbar-white bg-white static-top">
+<nav class="navbar navbar-expand navbar-dark bg-dark  static-top">
 
-    <a class="navbar-brand mr-1" href="index.html">WinServer</a>
+    <a class="navbar-brand mr-1" href="{{action('VisitanteController@index')}}">WinServer</a>
 
 
 </nav>

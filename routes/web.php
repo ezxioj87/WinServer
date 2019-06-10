@@ -11,37 +11,31 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/index',function(){
-    return 'hola';
-});
-Route::get('/','VisitanteController@index');
-//Route::get('/{seccionNombre}','VisitanteController@seccion');
 
-Route::get('/paginaProfesor/loginProfesor','ProfesorController@login')->middleware('guest')->name('loginShow');
-Route::Post('login','Auth\LoginController@login')->name('login');
+Route::get('/','VisitanteController@index');
+Route::get('/Seccion/{seccionNombre}','VisitanteController@seccion');
+
+
 Route::resource('seccions','SeccionController');
 Route::resource('programas','ProgramaController');
 Route::resource('users','UserController');
+
+Route::get('/Administracion/loginProfesor','ProfesorController@login')->middleware('guest')->name('loginShow');
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
-
-
+Route::Post('login','Auth\LoginController@login')->name('Login');
 Route::group([ 'middleware' => 'auth'], function()
 {
-    Route::get('/paginaProfesor','ProfesorController@index')->name("indexProfesor");
-    Route::get('/paginaProfesor/crearSeccion','ProfesorController@crearSeccion');
-    Route::get('/paginaProfesor/Seccion/{nombre}','ProfesorController@Seccion');
-    Route::get('/paginaProfesor/Seccion/{nombre}/crearArchivo','ProfesorController@crearArchivo');
-    Route::get('/paginaProfesor/modificarSeccion/{nombre}','ProfesorController@modificarSeccion')->name("modificarSeccion");
-    Route::get('/paginaProfesor/modificarArchivo/{nombre}','ProfesorController@modificarArchivo');
-    Route::get('/paginaProfesor/crearProfesor','ProfesorController@crearProfesor');
-    Route::get('/paginaProfesor/verProfesores','ProfesorController@verProfesores');
-    Route::get('/paginaProfesor/modificarProfesor/{nombre}','ProfesorController@modificarProfesor');
+    Route::get('/Administracion','ProfesorController@index')->name("indexProfesor");
+    Route::get('/Administracion/crearSeccion','ProfesorController@crearSeccion');
+    Route::get('/Administracion/Seccion/{nombre}','ProfesorController@seccion');
+    Route::get('/Administracion/Seccion/{nombre}/crearArchivo','ProfesorController@crearArchivo');
+    Route::get('/Administracion/modificarSeccion/{nombre}','ProfesorController@modificarSeccion')->name("modificarSeccion");
+    Route::get('/Administracion/modificarArchivo/{nombre}','ProfesorController@modificarArchivo');
+    Route::get('/Administracion/crearProfesor','ProfesorController@crearProfesor');
+    Route::get('/Administracion/verProfesores','ProfesorController@verProfesores');
+    Route::get('/Administracion/modificarProfesor/{nombre}','ProfesorController@modificarProfesor');
 });
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
 
 

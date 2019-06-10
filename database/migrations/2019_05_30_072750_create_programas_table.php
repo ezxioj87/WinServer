@@ -20,7 +20,7 @@ class CreateProgramasTable extends Migration
             $table->string('nombreImagen');
             $table->string('nombreArchivo');
             $table->unsignedBigInteger('seccion_id');
-            $table->foreign('seccion_id')->references('id')->on('seccions');
+            $table->foreign('seccion_id')->references('id')->on('seccions')->onDelete('cascade');
         });
 
     }

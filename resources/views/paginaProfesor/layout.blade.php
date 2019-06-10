@@ -38,16 +38,10 @@
                 <ul class="navbar-nav ml-auto navbar-right-top">
                     <li class="nav-item dropdown nav-user">
                         <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false"><img src="assets/images/avatar-1.jpg" alt=""
-                                                                           class="user-avatar-md rounded-circle"></a>
+                           aria-haspopup="true" aria-expanded="false">{{Auth::user()->name}}</a>
                         <div class="dropdown-menu dropdown-menu-right nav-user-dropdown"
                              aria-labelledby="navbarDropdownMenuLink2">
-
-                            <div class="nav-user-info">
-                                <h5 class="mb-0 text-white nav-user-name">{{Auth::user()->name}} </h5>
-                            </div>
-
-                            <a class="dropdown-item" href={{route('logout')}}><i class="fas fa-power-off mr-2"></i>Logout</a>
+                            <a class="dropdown-item" href={{route('logout')}}>Cerrar Sesión</a>
                         </div>
                     </li>
                 </ul>
@@ -77,6 +71,10 @@
                                 Menu
                             </li>
                             <li class="nav-item ">
+                                <a class="nav-link active"
+                                   href="{{action('ProfesorController@index')}}">Inicio</a>
+                            </li>
+                            <li class="nav-item ">
                                 <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="true"
                                    data-target="#submenu-1" aria-controls="submenu-1">Secciones <span
                                             class="badge badge-success">6</span></a>
@@ -87,7 +85,7 @@
                                             @foreach ($secciones as $seccion)
                                                 <li class="nav-item ">
                                                     <a class="nav-link active"
-                                                       href="{{action('ProfesorController@Seccion',$seccion->Nombre)}}">{{$seccion->Nombre}}</a>
+                                                       href="{{action('ProfesorController@seccion',$seccion->Nombre)}}">{{$seccion->Nombre}}</a>
                                                 </li>
                                             @endforeach
                                         @endif

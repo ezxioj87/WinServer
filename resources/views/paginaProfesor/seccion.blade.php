@@ -39,15 +39,16 @@
                             </div>
                             <div class="col-lg-2">
                             </div>
-                            <div class="col-lg-3">
-                                <a href={{action('ProfesorController@modificarSeccion',$seccion->Nombre)}} class="btn
-                                   btn-primary">Modificar</a>
+                            @if($admin)
+                                <div class="col-lg-3">
+                                    <a href={{action('ProfesorController@modificarSeccion',$seccion->Nombre)}} class="btn
+                                       btn-primary">Modificar</a>
 
-                                <button id="myBtn" class="btn btn-danger" data-toggle="modal"
-                                        data-target="#ModalBorrarSeccion">Eliminar
-                                </button>
-                            </div>
-
+                                    <button id="myBtn" class="btn btn-danger" data-toggle="modal"
+                                            data-target="#ModalBorrarSeccion">Eliminar
+                                    </button>
+                                </div>
+                            @endif
 
                         </div>
                         <div class="page-breadcrumb">
@@ -72,7 +73,8 @@
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLongTitle">¿Desea eliminar el archivo {{$programa->nombreArchivo}}?</h5>
+                                        <h5 class="modal-title" id="exampleModalLongTitle">¿Desea eliminar el
+                                            archivo {{$programa->nombreArchivo}}?</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
@@ -81,7 +83,8 @@
                                         {!! Form::model($programa,['route'=>['programas.destroy',$programa->id],'method'=>'Delete']) !!}
                                         {!! Form::submit('Eliminar',['class'=>'btn']) !!}
                                         {!! Form::close() !!}
-                                        <button onclick="" type="button" class="btn" data-dismiss="modal">Cancelar</button>
+                                        <button onclick="" type="button" class="btn" data-dismiss="modal">Cancelar
+                                        </button>
                                     </div>
                                 </div>
                             </div>

@@ -54,7 +54,7 @@ class SeccionController extends Controller
         $seccion->Descripcion = $request->input("descripcion");
 
         if($request->file('imagen')) {
-            $ruta = public_path() . '/imagenes/secciones/';
+            $ruta = public_path() . DIRECTORY_SEPARATOR .'imagenes' . DIRECTORY_SEPARATOR . 'secciones' .DIRECTORY_SEPARATOR;
 
             // recogida del form
             $imagenOriginal = $request->file('imagen');
@@ -81,7 +81,7 @@ class SeccionController extends Controller
                 $seccion->users()->attach(User::where('name',$user->name)->first());
             }
         }
-        return redirect("paginaProfesor");
+        return redirect("Administracion");
 
     }
 
@@ -117,8 +117,33 @@ class SeccionController extends Controller
     public function update(Request $request, $id)
     {
         $seccion = Seccion::find($id);
-        $seccion->fill($request->all()) ;
+        $seccion->Nombre = $request->input("Nombre");
+        $seccion->Descripcion = $request->input("Descripcion");
+
+        if($request->file('imagen')) {
+            $ruta = public_path() . DIRECTORY_SEPARATOR .'imagenes' . DIRECTORY_SEPARATOR . 'secciones' .DIRECTORY_SEPARATOR;
+
+            // recogida del form
+            $imagenOriginal = $request->file('imagen');
+
+            // crear instancia de imagen
+            $imagen = Image::make($imagenOriginal);
+
+            // generar un nombre aleatorio para la imagen
+            $temp_name = $imagenOriginal->getClientOriginalName();;
+
+            $imagen->resize(300, 300);
+
+            // guardar imagen
+            // save( [ruta], [calidad])
+            $imagen->save($ruta . $temp_name, 100);
+            $seccion->nombreImagen = $temp_name;
+        }else {
+            $seccion->nombreImagen = 'luisVelez.jpeg';
+        }
         $seccion->save();
+
+
 
         foreach(User::all() as $user){
             $seccion->users()->detach(User::where('name',$user->name)->first());
@@ -128,7 +153,7 @@ class SeccionController extends Controller
                 $seccion->users()->attach(User::where('name',$user->name)->first());
             }
         }
-        return redirect(action("ProfesorController@Seccion",$seccion->Nombre));
+        return redirect(action("ProfesorController@seccion",$seccion->Nombre));
     }
 
     /**
@@ -141,7 +166,7 @@ class SeccionController extends Controller
     {
         Seccion::destroy($id);
 
-        return redirect("paginaProfesor");
+        return redirect("Administracion");
     }
 
 

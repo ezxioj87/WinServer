@@ -11,13 +11,13 @@ class LoginController extends Controller
 {
     public function logout(Request $request) {
         Auth::logout();
-        return redirect('/paginaProfesor/loginProfesor');
+        return redirect('/Administracion/loginProfesor');
     }
     public function login(Request $request){
         if(Auth::user()) {
             $admin= $request->user()->hasRole('admin');
             $nombre=$request->user()->name;
-            return redirect('paginaProfesor/')->with('admin',$admin)->with('nombre',$nombre);
+            return redirect('Administracion/')->with('admin',$admin)->with('nombre',$nombre);
         }
 
 
@@ -29,9 +29,9 @@ class LoginController extends Controller
         if(Auth::attempt($credentials)){
             $admin= $request->user()->hasRole('admin');
 
-            return redirect('paginaProfesor/')->with('admin',$admin);
+            return redirect('Administracion/')->with('admin',$admin);
         }
-        return back()->withErrors(['name'=>'Este nombre es incorrecot']);
+        return back()->withErrors(['name'=>'Este usuario o contraseña son incorrectos']);
     }
 
     public function __construct(){

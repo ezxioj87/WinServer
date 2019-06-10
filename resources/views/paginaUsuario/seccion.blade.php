@@ -10,7 +10,7 @@
     <p>{{$seccion->Descripcion}}</p>
 
     <div class="row">
-        @foreach($programas as $programa)
+        @forelse($programas as $programa)
             <div class="col-sm-2">
                 <!-- .card -->
                 <div class="card card-figure">
@@ -19,15 +19,15 @@
                         <!-- .figure-img -->
                         <div class="figure-img">
                             <a href="{{ URL::asset('/archivos/'.$programa->nombreArchivo) }}" download><img
-                                        class="img-fluid imgPrueba"
+                                        class="img-fluid"
                                         src="{{ URL::asset('imagenes/archivos/'.$programa->nombreImagen) }}"
                                         alt="Card image cap"></a>
                         </div>
                         <!-- /.figure-img -->
                         <!-- .figure-caption -->
                         <figcaption class="figure-caption">
-                            <p class="text-muted mb-0"> {{$programa->Nombre}} </p>
-                            <p class="text-muted mb-0"> {{$programa->Descripcion}} </p>
+                            <a class="text-decoration-none" href="{{ URL::asset('/archivos/'.$programa->nombreArchivo) }}" download><p class="text-muted mb-0"> {{$programa->Nombre}} </p>
+                           <p class="text-muted mb-0"> {{$programa->Descripcion}} </p></a>
                         </figcaption>
                         <!-- /.figure-caption -->
                     </figure>
@@ -36,7 +36,8 @@
                 <!-- /.card -->
             </div>
             <div class="col-sm-1"></div>
-        @endforeach
+        @empty
+        @endforelse
 
     </div>
 

@@ -17,7 +17,17 @@ class VisitanteController extends Controller
     {
         $secciones = Seccion::all();
         $seccion = Seccion::where('Nombre',$seccionNombre)->get()->first();
-       $programas='';
-        return view('paginaUsuario.seccion')->with('programas',$programas)->with('seccion',$seccion)->with('secciones',$secciones);
+        $existeSeccion=false;
+        foreach ($secciones as $seccion1) {
+            if($seccion1->Nombre==$seccionNombre){
+                $existeSeccion=true;
+            }
+        }
+        if ($existeSeccion) {
+            $programas= $seccion->programas;
+            return view('paginaUsuario.seccion')->with('programas',$programas)->with('seccion',$seccion)->with('secciones',$secciones);
+        } else {
+            return redirect('/');
+        }
     }
 }

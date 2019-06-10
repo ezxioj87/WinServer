@@ -62,7 +62,7 @@ class UserController extends Controller
                 $user->seccions()->attach(Seccion::where('Nombre',$seccion->Nombre)->first());
             }
         }
-        return redirect("paginaProfesor/verProfesores");
+        return redirect("Administracion/verProfesores");
     }
 
     /**
@@ -128,7 +128,7 @@ class UserController extends Controller
                 $user->seccions()->attach(Seccion::where('Nombre',$seccion->Nombre)->first());
             }
         }
-        return redirect("paginaProfesor/verProfesores");
+        return redirect("Administracion/verProfesores");
     }
 
     /**
@@ -142,7 +142,7 @@ class UserController extends Controller
         User::destroy($id);
 
 
-        return redirect("paginaProfesor/verProfesores");
+        return redirect("Administracion/verProfesores");
     }
 }
 

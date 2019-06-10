@@ -11,6 +11,6 @@ class Programa extends Model
 
     public function seccion()
     {
-        return $this->belongsTo(App\Seccion::class);
+        return $this->belongsTo('App\Seccion');
     }
 }
