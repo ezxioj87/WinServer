@@ -33,11 +33,11 @@
                                 {!! Form::open(['route'=>'programas.store','method'=>'Post','enctype'=>'multipart/form-data']) !!}
                                 <div class="form-group">
                                     {!! Form::label('Nombre:') !!}
-                                    {!! Form::text('nombre',null,['class'=>'form-control','placeholder'=>'Ingresa el nombre de la seccion']) !!}
+                                    {!! Form::text('nombre',null,['class'=>'form-control','placeholder'=>'Ingresa el nombre del archivo']) !!}
                                 </div>
                                 <div class="form-group">
                                     {!! Form::label('Descripcion:') !!}
-                                    {!! Form::textarea('descripcion',null,['class'=>'form-control','placeholder'=>'Ingresa la descripcion de la seccion']) !!}
+                                    {!! Form::textarea('descripcion',null,['class'=>'form-control','placeholder'=>'Ingresa la descripcion del archivo']) !!}
                                 </div>
                                 <div class="form-group">
                                     {!! Form::label('Programa:') !!}
