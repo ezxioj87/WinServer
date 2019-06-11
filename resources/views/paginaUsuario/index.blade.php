@@ -10,10 +10,10 @@
         <h2>Aquí podras descargar los programas necesarios para tus asignaturas</h2>
     </div>
 
-    <div class="card mb-3">
+    <div class="col-sm-12 text-center">
         <img
-                class="img-fluid"
-                src="{{ URL::asset('imagenes/secciones/fachadaIES.jpg') }}"
+                class="img-responsive"
+                src="{{ URL::asset('imagenes/secciones/luisVelez.jpeg') }}"
                 alt="Card image cap">
     </div>
         <!-- /.container-fluid -->
