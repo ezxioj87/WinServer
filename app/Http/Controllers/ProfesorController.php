@@ -46,7 +46,7 @@ class ProfesorController extends Controller
             }
         }
         if ($esSuSeccion) {
-            return view('paginaProfesor.Seccion')->with('seccion', $seccion)->with('programas', $programas)->with('admin', $admin)->with('secciones', $secciones);
+            return view('paginaProfesor.seccion')->with('seccion', $seccion)->with('programas', $programas)->with('admin', $admin)->with('secciones', $secciones);
         } else {
             return redirect('Administracion');
         }
