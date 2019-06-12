@@ -21,7 +21,7 @@ class ProfesorController extends Controller
     {
         $admin = $request->user()->hasRole('admin');
         if (!$admin) {
-            return redirect('paginaProfesor');
+            return redirect('Administracion');
         }
         $profesores = User::all();
         $user = $request->user();
